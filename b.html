@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Handling with v-model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.11/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app2">
+        <h1>Form Input Handling with v-model</h1>
+
+        <form @submit.prevent="submitTheForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" v-model="formData.username" required>
+
+            
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div v-if="isSubmitted">
+            <h2>Form Data:</h2>
+            <p>Username: {{ formData.username }}</p>
+            
+        </div>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    formData: {
+                        // Add all the form fields here
+                        username: '',
+                        
+                    },
+                    isSubmitted: false,
+                };
+            },
+            methods: {
+                submitTheForm() {
+                    // Handle form submission logic here
+                    this.isSubmitted = true;
+                },
+            },
+        });
+
+        app.mount('#app2');
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Conditionals</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.11/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+      
+       <button @click="display1 = !display1">Button-1</button>
+       <p v-if="display1">* DISPLAY IT  FIRST*</p>
+       <hr>
+
+       <h1>Conditional Rendering with v-else-if</h1>
+       <button @click="changeStatus">Change Status</button>
+       <h6>click the button</h6>
+        <p v-if="status === '1'">Success: your are the first.</p>
+        <p v-else-if="status === '2'">ok:you are the second.</p>
+        <p v-else-if="status === '3'">hmmm: you are the third</p>
+        <p v-else>try......</p>
+
+       <hr>
+       <h1>Conditional Rendering with v-show</h1>
+
+       <p>This element can be hidden or shown </p>
+       <p v-show="isVisible">* DISPLAY IT *</p>
+
+       <button @click="toggleVisibility">Toggle Visibility</button>
+       <hr>
+       <h1>Conditional Rendering with  v-for</h1>
+       <li v-for="i in states" :key="i.id">{{ i.name }}</li>
+        <hr>
+
+        <h1>Conditional Rendering with v-if and v-for</h1>
+
+        <ul>
+            <li v-for="(item, index) in items" :key="index">
+                <span v-if="item.isVisible">{{ item.text }}</span>
+            </li>
+        </ul>
+        <button @click="toggleVifAndVfor">Toggle It</button>
+    </div>
+
+
+       
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+    data() {
+        return {
+            display1: false,
+            isVisible: true,
+            status: null,
+            states: [
+
+                { id: 1, name: "New South Wales", status: "State" },
+                { id: 2, name: "Victoria", status: "State" },
+                { id: 3, name: "Queensland", status: "State" },
+                { id: 4, name: "South Australia", status: "State" },
+                { id: 5, name: "Western Australia", status: "State" },
+                { id: 6, name: "Tasmania", status: "State" },
+
+            ],
+            items: [
+                { text: 'A', isVisible: true },
+                { text: 'B', isVisible: false },
+                { text: 'C', isVisible: true },
+            ],
+           
+        };
+    },
+    methods: {
+        changeStatus() {
+            // Change the status to a random value
+            const statuses = ['1', '2', '3'];
+            const randomIndex = Math.floor(Math.random() * statuses.length);
+            this.status = statuses[randomIndex];
+        },
+        toggleVisibility() {
+            // Toggle the visibility of the element
+            this.isVisible = !this.isVisible;
+        },
+        toggleVifAndVfor() {
+            // Toggle the visibility of items using v-if and v-for
+            this.items.forEach(i => {
+                i.isVisible = !i.isVisible;
+            });
+        },
+       
+    },
+    computed: {
+
+    }
+});
+
+app.mount('#app');
+
+    </script>
+</body>
+</html>
